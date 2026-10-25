@@ -33,7 +33,6 @@ namespace MaaWpfGui.Configuration.Converter.Specific;
 // All are no-op when the legacy keys are absent, hence idempotent.
 internal sealed class SettingsPageReorgMigrationConverter : JsonConverter<Root>
 {
-
     public override Root? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var node = JsonNode.Parse(ref reader);
