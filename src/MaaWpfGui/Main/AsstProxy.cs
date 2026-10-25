@@ -1364,7 +1364,6 @@ public class AsstProxy
                     }
             }
         }
-
     }
 
     private void ProcTaskChainMsg(AsstMsg msg, JObject details)
@@ -1481,7 +1480,6 @@ public class AsstProxy
                     {
                         var sanityLog = "\n" + LocalizationHelper.GetStringFormat("CurrentSanity", FightSetting.SanityReport.SanityCurrent, FightSetting.SanityReport.SanityMax);
                         Instances.TaskQueueViewModel.AddLog(completionLog + sanityLog);
-
                     }
                     else
                     {
@@ -1612,7 +1610,6 @@ public class AsstProxy
 
                     // Instances.TaskQueueViewModel.CheckAndShutdown();
                     _ = Instances.TaskQueueViewModel.CheckAfterCompleted(hasTaskErrors);
-
                 }
                 else if (runOwner == RunOwner.Copilot)
                 {

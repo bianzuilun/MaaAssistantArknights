@@ -1113,7 +1113,6 @@ public class ToolboxViewModel : Screen
                     var newCount = existingItem.Count + add;
                     existingItem.Count = newCount;
                     hasUpdates = true;
-
                 }
             }
             else

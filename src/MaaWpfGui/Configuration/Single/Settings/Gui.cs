@@ -59,5 +59,4 @@ public partial class Gui : NotifyPropertyChangedWithValue
     public string WindowTitlePrefix { get; set; } = string.Empty;
 
     public PostActions PostActions { get; set; } = PostActions.None;
-
 }

@@ -97,7 +97,6 @@ public partial class ErrorDialogView : INotifyPropertyChanged
 
         var isZhCn = ConfigFactory.Root.Gui.Localization == "zh-cn";
         ErrorQqGroupLink.Visibility = isZhCn ? Visibility.Visible : Visibility.Collapsed;
-
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

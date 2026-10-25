@@ -1168,7 +1168,6 @@ public class Bootstrapper : Bootstrapper<RootViewModel>
             _ = DemoShot.DemoShotService.RunAsync(DemoDataPath!, ShotsOutputDir!);
             return;
         }
-
     }
 
     /// <inheritdoc/>

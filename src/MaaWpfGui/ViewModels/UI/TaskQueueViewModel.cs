@@ -1219,7 +1219,6 @@ public class TaskQueueViewModel : Screen
         }
 
         await LinkStart();
-
     }
 
     /// <summary>
