@@ -362,9 +362,6 @@ public static class ConfigurationKeys
     public const string MiniGameSecretFrontEnding = "MiniGame.SecretFrontEnding"; // 废弃
     public const string MiniGameSecretFrontEvent = "MiniGame.SecretFrontEvent"; // 废弃
 
-    public const string AchievementPopupDisabled = "Achievement.PopupDisabled";
-    public const string AchievementPopupAutoClose = "Achievement.PopupAutoClose";
-
     public const string OverlayTarget = "Overlay.Target";
 
     public const string AnnouncementInfo = "Announcement.AnnouncementInfo"; // 已迁移

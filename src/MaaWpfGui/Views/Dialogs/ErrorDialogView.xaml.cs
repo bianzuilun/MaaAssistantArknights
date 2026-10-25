@@ -98,14 +98,6 @@ public partial class ErrorDialogView : INotifyPropertyChanged
         var isZhCn = ConfigFactory.Root.Gui.Localization == "zh-cn";
         ErrorQqGroupLink.Visibility = isZhCn ? Visibility.Visible : Visibility.Collapsed;
 
-        try
-        {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.CongratulationError);
-        }
-        catch
-        {
-            // ignored
-        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -154,8 +146,6 @@ public partial class ErrorDialogView : INotifyPropertyChanged
         {
             return LocalizationHelper.GetString("ErrorSolutionDragDrop");
         }
-
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.UnexpectedCrash);
 
         return $"{LocalizationHelper.GetString("UnknownErrorOccurs")}\n" +
                $"{LocalizationHelper.GetString("ErrorCrashMessageOpenLog")}\n" +

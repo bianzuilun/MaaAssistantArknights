@@ -76,7 +76,6 @@ public class BackgroundSettingsUserControlModel : PropertyChangedBase
             // 背景图变更后，若莫奈自动取色开启，重新提取主色
             UpdateMonet();
 
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.CustomizationMaster);
         }
     } = ConfigFactory.Root.Gui.Background.ImagePath;
 

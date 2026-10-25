@@ -1115,7 +1115,6 @@ public partial class CopilotViewModel : Screen
         CouldLikeWebJson = false;
         if (await RateCopilot(CopilotId) == PrtsStatus.Success)
         {
-            AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.CopilotLikeGroup);
         }
     }
 
@@ -1412,7 +1411,6 @@ public partial class CopilotViewModel : Screen
             AddLog(LocalizationHelper.GetStringFormat("UnsupportedStages", copilot.StageName), UiLogColor.Error, showTime: false);
             navigateName = FindStageName(copilot.Documentation?.Title ?? string.Empty);
             _ = Task.Run(ResourceUpdater.ResourceUpdateAndReloadAsync);
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.MapOutdated);
             return true;
         }
 
@@ -1499,7 +1497,6 @@ public partial class CopilotViewModel : Screen
         {
             AddLog(LocalizationHelper.GetStringFormat("UnsupportedStages", copilot.StageName), UiLogColor.Error, showTime: false);
             _ = Task.Run(ResourceUpdater.ResourceUpdateAndReloadAsync);
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.MapOutdated);
         }
 
         if (writeToCache)
@@ -2493,7 +2490,6 @@ public partial class CopilotViewModel : Screen
 
             AddLog(LocalizationHelper.GetStringFormat("UnsupportedStages", name), UiLogColor.Error, showTime: false);
             _ = Task.Run(ResourceUpdater.ResourceUpdateAndReloadAsync);
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.MapOutdated);
             return false;
         }
 
@@ -2509,7 +2505,6 @@ public partial class CopilotViewModel : Screen
             {
                 AddLog(LocalizationHelper.GetStringFormat("CopilotIllegalOperName", task.Name), UiLogColor.Error, showTime: false);
                 _ = Task.Run(ResourceUpdater.ResourceUpdateAndReloadAsync);
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.MapOutdated);
                 ok = false;
             }
         }

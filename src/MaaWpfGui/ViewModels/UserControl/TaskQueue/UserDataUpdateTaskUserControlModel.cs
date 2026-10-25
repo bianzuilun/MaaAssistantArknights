@@ -152,11 +152,6 @@ public class UserDataUpdateTaskUserControlModel : TaskSettingsViewModel, UserDat
                 ids.Add(depotTaskId);
             }
 
-            if (operBoxTriggerDue && depotTriggerDue)
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.DoubleSync);
-            }
-
             return ids.Count > 0 || operBoxSyncedWithoutTask ? (true, ids) : (null, []);
         }
 

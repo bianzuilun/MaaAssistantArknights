@@ -108,10 +108,6 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
             SetAndNotify(ref field, value);
             ConfigFactory.Root.Gui.MinimizeToTray = value;
             Instances.MainWindowManager.SetMinimizeToTray(value);
-            if (value)
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.DisappearTrick);
-            }
         }
     } = ConfigFactory.Root.Gui.MinimizeToTray;
 
@@ -334,10 +330,6 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
             Instances.SettingsViewModel.UpdateWindowTitle();
             var config = string.Join(' ', _windowTitleSelectShowList.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
             ConfigFactory.Root.Gui.WindowTitleSelectShowList = config;
-            if (config != "2 3 4")
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.TitleTweaker);
-            }
         }
     }
 
@@ -361,8 +353,6 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
             }
 
             ConfigFactory.Root.Gui.Localization = value;
-
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.Linguist);
 
             var mainWindow = Application.Current.MainWindow;
             if (mainWindow != null)

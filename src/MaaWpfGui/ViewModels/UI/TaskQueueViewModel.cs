@@ -167,7 +167,6 @@ public class TaskQueueViewModel : Screen
         Application.Current.Dispatcher.InvokeAsync(() => {
             if (e.Action == NotifyCollectionChangedAction.Move)
             {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.SortingMaster);
                 int oldIndex = e.OldStartingIndex;
                 int newIndex = e.NewStartingIndex;
 
@@ -887,11 +886,6 @@ public class TaskQueueViewModel : Screen
 
             _lastTimerElapsed = currentTime;
 
-            if ((currentTime.Hour == 3 || currentTime.Hour == 13 || currentTime.Hour == 23) && currentTime.Minute == 25 && !_runningState.GetIdle())
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.Time325);
-            }
-
             VersionUpdateSettingsUserControlModel.Instance.RefreshMirrorChyanCdkRemaining();
             HandleDatePromptUpdate();
             HandleCheckForUpdates();
@@ -1226,7 +1220,6 @@ public class TaskQueueViewModel : Screen
 
         await LinkStart();
 
-        AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.ScheduleMasterGroup);
     }
 
     /// <summary>
@@ -1900,10 +1893,6 @@ public class TaskQueueViewModel : Screen
         {
             ConfigFactory.CurrentConfig.TaskQueue.Add(task);
             TaskItemViewModels.Add(new TaskItemViewModel());
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.QueueExpansion);
-            AchievementTrackerHelper.Instance.TrackManualTaskAddition(
-                task.TaskType.ToString(),
-                TaskTypeList.Count(item => ShowDebugTask || !item.IsDebugOnly));
         }
         else
         {
@@ -2069,7 +2058,6 @@ public class TaskQueueViewModel : Screen
             {
                 TaskItemViewModels.RemoveAt(index);
                 AddLog(LocalizationHelper.GetStringFormat("TaskDeleted", taskItem.Name), UiLogColor.Info);
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.QueueSimplifier);
             }
         }
     }
@@ -2467,18 +2455,6 @@ public class TaskQueueViewModel : Screen
         var resourceDateTimeLong = SettingsViewModel.VersionUpdateSettings.ResourceDateTimeCurrentCultureString;
         AddLog($"Build Time:\n{buildDateTimeLong}\nResource Time:\n{resourceDateTimeLong}");
 
-        var buildTimeInterval = (DateTimeOffset.UtcNow - VersionUpdateSettingsUserControlModel.BuildDateTime).TotalDays;
-        var resourceTimeInterval = (DateTimeOffset.UtcNow - SettingsViewModel.VersionUpdateSettings.ResourceDateTime).TotalDays;
-        var maxTimeInterval = Math.Max(buildTimeInterval, resourceTimeInterval);
-        if (maxTimeInterval > 90)
-        {
-            AddLog(
-                LocalizationHelper.GetStringFormat(
-                    "Achievement.Martian.ConditionsTip",
-                    Math.Round(maxTimeInterval / 30, 1)),
-                UiLogColor.Error);
-        }
-
         var uiVersion = VersionUpdateSettingsUserControlModel.UiVersion;
         var coreVersion = VersionUpdateSettingsUserControlModel.CoreVersion;
         if (!Instances.VersionUpdateDialogViewModel.IsDebugVersion() && uiVersion != coreVersion)
@@ -2625,8 +2601,6 @@ public class TaskQueueViewModel : Screen
             return;
         }
 
-        AchievementTrackerHelper.Instance.SetProgress(AchievementIds.TaskChainKing, count);
-
         taskRet &= Instances.AsstProxy.AsstStart();
 
         if (taskRet)
@@ -2641,9 +2615,6 @@ public class TaskQueueViewModel : Screen
             await Stop();
             SetStopped();
         }
-
-        AchievementTrackerHelper.Instance.MissionStartCountAdd();
-        AchievementTrackerHelper.Instance.UseDailyAdd();
 
         static void SetTaskStatus(int index, TaskItemStatus status)
         {
@@ -2677,7 +2648,6 @@ public class TaskQueueViewModel : Screen
         }
 
         _ = StopManuallyAsync();
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.TacticalRetreat);
 
         if (_taskStartTime is null)
         {
@@ -2687,7 +2657,6 @@ public class TaskQueueViewModel : Screen
         var duration = DateTime.Now - _taskStartTime.Value;
         if (duration.TotalSeconds < 5)
         {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.TaskStartCancel);
         }
     }
 

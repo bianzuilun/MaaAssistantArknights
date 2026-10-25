@@ -445,10 +445,6 @@ public class InfrastTaskUserControlModel : TaskSettingsViewModel, InfrastTaskUse
         }
 
         DefaultInfrast = UserDefined;
-        if (CustomInfrastPlanList.Count > 0)
-        {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.PrivateDormManager);
-        }
     }
 
     public string CustomInfrastFile
@@ -564,10 +560,6 @@ public class InfrastTaskUserControlModel : TaskSettingsViewModel, InfrastTaskUse
             Instances.TaskQueueViewModel.AddLog(string.Empty, splitMode: UI.TaskQueueViewModel.LogCardSplitMode.After);
 
             CustomInfrastPlanList = [.. list];
-            if (DefaultInfrast == UserDefined && list.Count > 0)
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.PrivateDormManager);
-            }
         }
         catch (Exception)
         {

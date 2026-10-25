@@ -129,8 +129,6 @@ public partial class VersionUpdateSettingsUserControl : System.Windows.Controls.
             _timer.IsEnabled = true;
         }
 
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.VersionClick);
-
         if (_easterEggsCount < 5)
         {
             ++_easterEggsCount;
@@ -145,8 +143,6 @@ public partial class VersionUpdateSettingsUserControl : System.Windows.Controls.
             ConfirmContent = LocalizationHelper.GetString("ConfirmExitText"),
         };
         MessageBoxHelper.Show(info);
-
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.Rules);
 
         /*
         var growlInfo = new GrowlInfo

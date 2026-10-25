@@ -288,7 +288,6 @@ public class RemoteControlService
                         _instantTaskQueue.Enqueue(task);
                         break;
                     default:
-                        AchievementTrackerHelper.Instance.Unlock(AchievementIds.NotFound404);
                         break;
                 }
             }
@@ -404,7 +403,6 @@ public class RemoteControlService
                     });
                     break;
                 default:
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.NotFound404);
                     break;
             }
 
@@ -489,7 +487,6 @@ public class RemoteControlService
                     }
 
                 default:
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.NotFound404);
                     break;
             }
 

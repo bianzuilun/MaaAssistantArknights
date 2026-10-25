@@ -60,7 +60,4 @@ public partial class Gui : NotifyPropertyChangedWithValue
 
     public PostActions PostActions { get; set; } = PostActions.None;
 
-    public bool AchievementPopupDisabled { get; set; }
-
-    public bool AchievementPopupAutoClose { get; set; }
 }

@@ -163,10 +163,6 @@ public static class DemoShotService
     /// </summary>
     private static void ApplyStaticSettings(DemoShotData data)
     {
-        // 成就通知悬浮在窗口内右上角，会出现在截图里，演示期间一律禁用；
-        // 必须先于 WindowTitleSelectShowList 等可能解锁成就的设置，否则拦截晚于首次弹窗
-        SettingsViewModel.AchievementSettings.AchievementPopupDisabled = true;
-
         if (Application.Current.MainWindow is { } window)
         {
             window.WindowStartupLocation = WindowStartupLocation.Manual;

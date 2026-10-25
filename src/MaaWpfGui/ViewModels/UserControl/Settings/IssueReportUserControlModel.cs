@@ -54,7 +54,6 @@ public class IssueReportUserControlModel : PropertyChangedBase
             }
 
             Process.Start("explorer.exe", PathsHelper.DebugDir);
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.BackstageExplorer);
         }
         catch (Exception ex)
         {
@@ -414,7 +413,6 @@ public class IssueReportUserControlModel : PropertyChangedBase
     public void SetAcknowledgedNightlyWarning()
     {
         // 其实不应该放这里，但懒得写一个新的方法，就塞到这里了
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.ProblemFeedback);
         VersionUpdateSettingsUserControlModel.Instance.HasAcknowledgedNightlyWarning = true;
     }
 

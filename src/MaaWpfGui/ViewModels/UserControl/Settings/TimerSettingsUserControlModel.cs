@@ -146,7 +146,6 @@ public class TimerSettingsUserControlModel : PropertyChangedBase
     {
         if (e.PropertyName == nameof(Timer.IsEnabled))
         {
-            AchievementTrackerHelper.Instance.CheckTimeManagementMaster();
         }
 
         // 启用状态与时间变化都会改变计划任务的触发点，防抖合并后全量重建

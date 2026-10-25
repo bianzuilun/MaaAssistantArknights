@@ -531,7 +531,6 @@ public class VersionUpdateSettingsUserControlModel : PropertyChangedBase
 
         if (ret == VersionUpdateDialogViewModel.CheckUpdateRetT.AlreadyLatest)
         {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.LatestVersionInspector);
         }
 
         if (ret == VersionUpdateDialogViewModel.CheckUpdateRetT.OK)
@@ -587,7 +586,6 @@ public class VersionUpdateSettingsUserControlModel : PropertyChangedBase
         }
         else
         {
-            AchievementTrackerHelper.Instance.AddProgress(AchievementIds.CdnTorture);
         }
 
         IsCheckingForUpdates = false;
@@ -597,7 +595,6 @@ public class VersionUpdateSettingsUserControlModel : PropertyChangedBase
     [UsedImplicitly]
     public void ShowChangelog()
     {
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.ChangelogReader);
         _ = Instances.VersionUpdateDialogViewModel.DownloadMissingContributorAvatarsAsync();
         if (Instances.VersionUpdateDialogViewModel.View is System.Windows.Window window)
         {

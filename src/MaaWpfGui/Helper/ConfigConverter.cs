@@ -894,10 +894,6 @@ public class ConfigConverter
             ConfigurationHelper.DeleteValue(ConfigurationKeys.WindowTitlePrefix);
             ConfigFactory.CurrentConfig.Gui.PostActions = JsonConvert.DeserializeObject<PostActions>(ConfigurationHelper.GetValue(ConfigurationKeys.PostActions, "0"));
             ConfigurationHelper.DeleteValue(ConfigurationKeys.PostActions);
-            ConfigFactory.CurrentConfig.Gui.AchievementPopupDisabled = ConfigurationHelper.GetValue(ConfigurationKeys.AchievementPopupDisabled, false);
-            ConfigFactory.CurrentConfig.Gui.AchievementPopupAutoClose = ConfigurationHelper.GetValue(ConfigurationKeys.AchievementPopupAutoClose, false);
-            ConfigurationHelper.DeleteValue(ConfigurationKeys.AchievementPopupDisabled);
-            ConfigurationHelper.DeleteValue(ConfigurationKeys.AchievementPopupAutoClose);
 
             // Copilot
             {

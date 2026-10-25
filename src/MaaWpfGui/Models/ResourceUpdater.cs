@@ -177,7 +177,6 @@ public static class ResourceUpdater
                     break;
                 case MirrorChyanErrorCode.KeyInvalid:
                     ToastNotification.ShowDirect(LocalizationHelper.GetString("MirrorChyanCdkInvalid"));
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.MirrorChyanCdkError);
                     break;
                 case MirrorChyanErrorCode.ResourceQuotaExhausted:
                     ToastNotification.ShowDirect(LocalizationHelper.GetString("MirrorChyanCdkQuotaExhausted"));
@@ -300,7 +299,6 @@ public static class ResourceUpdater
         }
 
         SettingsViewModel.VersionUpdateSettings.NewResourceFoundInfo = string.Empty;
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.MirrorChyanFirstUse);
         OutputDownloadProgress(
             downloading: false,
             output: LocalizationHelper.GetString("GameResourceUpdated"),

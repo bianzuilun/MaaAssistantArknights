@@ -127,11 +127,6 @@ public class SettingsViewModel : Screen
     public static IssueReportUserControlModel IssueReportSettings { get; } = IssueReportUserControlModel.Instance;
 
     /// <summary>
-    /// Gets 成就 model
-    /// </summary>
-    public static AchievementSettingsUserControlModel AchievementSettings { get; } = AchievementSettingsUserControlModel.Instance;
-
-    /// <summary>
     /// Gets 三方服务 model
     /// </summary>
     public static ThirdPartyServiceSettingsUserControlModel ThirdPartyServiceSettings { get; } = ThirdPartyServiceSettingsUserControlModel.Instance;
@@ -203,8 +198,6 @@ public class SettingsViewModel : Screen
 
     public SettingItemViewModel HotKeySettingsSetting => GetSettingItemByKey("HotKeySettings");
 
-    public SettingItemViewModel AchievementSettingsSetting => GetSettingItemByKey("AchievementSettings");
-
     public SettingItemViewModel UpdateSettingsSetting => GetSettingItemByKey("UpdateSettings");
 
     public SettingItemViewModel IssueReportSetting => GetSettingItemByKey("IssueReport");
@@ -260,11 +253,6 @@ public class SettingsViewModel : Screen
             for (int i = 0; i < Settings.Count; i++)
             {
                 Settings[i].Value = i;
-            }
-
-            if (e?.Action == NotifyCollectionChangedAction.Move)
-            {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.SortingMaster);
             }
 
             OnSettingItemValueChanged();
@@ -1254,12 +1242,6 @@ public class SettingsViewModel : Screen
     {
         get => GetExpanderState(SettingKey.HotKeySettings);
         set => SetExpanderState(SettingKey.HotKeySettings, value);
-    }
-
-    public bool IsAchievementSettingsExpanded
-    {
-        get => GetExpanderState(SettingKey.AchievementSettings);
-        set => SetExpanderState(SettingKey.AchievementSettings, value);
     }
 
     public bool IsUpdateSettingsExpanded

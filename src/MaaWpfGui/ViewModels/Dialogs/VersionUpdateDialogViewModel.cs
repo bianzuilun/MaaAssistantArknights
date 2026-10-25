@@ -1018,7 +1018,6 @@ public class VersionUpdateDialogViewModel : Screen
             return CheckUpdateRetT.NoNeedToUpdate;
         }
 
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.MirrorChyanFirstUse);
         return CheckUpdateRetT.OK;
     }
 
@@ -1679,7 +1678,6 @@ public class VersionUpdateDialogViewModel : Screen
 
             case MirrorChyanErrorCode.KeyInvalid:
                 ToastNotification.ShowDirect(LocalizationHelper.GetString("MirrorChyanCdkInvalid"));
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.MirrorChyanCdkError);
                 break;
 
             case MirrorChyanErrorCode.ResourceQuotaExhausted:

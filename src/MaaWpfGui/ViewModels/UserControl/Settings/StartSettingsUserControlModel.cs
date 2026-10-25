@@ -73,7 +73,6 @@ public class StartSettingsUserControlModel : PropertyChangedBase
             }
 
             SetAndNotify(ref _startSelf, value);
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.StartupBoot);
         }
     }
 

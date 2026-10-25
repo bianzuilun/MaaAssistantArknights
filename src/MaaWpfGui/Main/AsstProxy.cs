@@ -1365,36 +1365,6 @@ public class AsstProxy
             }
         }
 
-        switch (avgInt)
-        {
-            case >= 800:
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge1);
-                break;
-
-            case >= 400:
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge2);
-                break;
-
-            default:
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge3);
-
-                if (avgInt < 100)
-                {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge4);
-                }
-
-                if (avgInt < 10)
-                {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge5);
-                }
-
-                if (avgInt < 5)
-                {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.SnapshotChallenge6);
-                }
-
-                break;
-        }
     }
 
     private void ProcTaskChainMsg(AsstMsg msg, JObject details)
@@ -1449,7 +1419,6 @@ public class AsstProxy
                         DisplayErrorLog();
                         Instances.NotificationService.Notify(NotificationSource.Copilot, new(NotificationKind.TaskError, log, log),
                             UiLogColor.Error, logContent: LocalizationHelper.GetString("CombatError"));
-                        AchievementTrackerHelper.Instance.Unlock(AchievementIds.CopilotError);
                     }
                     else
                     {
@@ -1513,10 +1482,6 @@ public class AsstProxy
                         var sanityLog = "\n" + LocalizationHelper.GetStringFormat("CurrentSanity", FightSetting.SanityReport.SanityCurrent, FightSetting.SanityReport.SanityMax);
                         Instances.TaskQueueViewModel.AddLog(completionLog + sanityLog);
 
-                        if (FightSetting.SanityReport.SanityCurrent == 0)
-                        {
-                            AchievementTrackerHelper.Instance.Unlock(AchievementIds.SanityPlanner);
-                        }
                     }
                     else
                     {
@@ -1524,11 +1489,6 @@ public class AsstProxy
                     }
 
                     _logger.Information("Completed Task Chain: {TaskChain}, Task ID: {TaskId}", taskChain, taskId);
-
-                    if (isCopilotTaskChain)
-                    {
-                        AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.UseCopilotGroup);
-                    }
 
                     break;
                 }
@@ -1653,10 +1613,6 @@ public class AsstProxy
                     // Instances.TaskQueueViewModel.CheckAndShutdown();
                     _ = Instances.TaskQueueViewModel.CheckAfterCompleted(hasTaskErrors);
 
-                    if (Instances.OverlayViewModel.IsCreated)
-                    {
-                        AchievementTrackerHelper.Instance.Unlock(AchievementIds.LogSupervisor);
-                    }
                 }
                 else if (runOwner == RunOwner.Copilot)
                 {
@@ -1895,7 +1851,6 @@ public class AsstProxy
 
                         if (missingOpers is not null && missingOpers.Count >= 2)
                         {
-                            AchievementTrackerHelper.Instance.Unlock(AchievementIds.Irreplaceable);
                         }
                     }
                     break;
@@ -2023,10 +1978,6 @@ public class AsstProxy
 
                         case "RecruitConfirm":
                             RecruitConfirmTime++;
-                            if (RecruitConfirmTime > AchievementTrackerHelper.Instance.GetProgressToGroup(AchievementIds.HrManager))
-                            {
-                                AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.HrManager);
-                            }
 
                             Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("RecruitConfirm") + $" {RecruitConfirmTime}", UiLogColor.Info, updateCardImage: true);
                             break;
@@ -2038,7 +1989,6 @@ public class AsstProxy
                         /* 肉鸽相关 */
                         case "ExitThenAbandon":
                             Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("ExplorationAbandoned"), UiLogColor.ExplorationAbandonedIS);
-                            AchievementTrackerHelper.Instance.AddProgress(AchievementIds.RoguelikeRetreat);
                             break;
 
                         // case "StartAction":
@@ -2100,7 +2050,6 @@ public class AsstProxy
 
                         case "GamePass":
                             Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("RoguelikeGamePass"), UiLogColor.RareOperator);
-                            AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.RoguelikeGamePassGroup);
                             break;
 
                         case "BattleStartAll":
@@ -2165,12 +2114,9 @@ public class AsstProxy
                             {
                                 case "UnlockClues":
                                     Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("ClueExchangeUnlocked"));
-                                    AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.ClueUseGroup);
-                                    AchievementTrackerHelper.Instance.ClueObsessionAdd();
                                     break;
 
                                 case "SendClues":
-                                    AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.ClueSendGroup);
                                     break;
                             }
 
@@ -2201,7 +2147,6 @@ public class AsstProxy
                                             mall.CreditFightLastTime = DateTime.UtcNow.ToYjDate().ToFormattedString();
                                         }
                                         Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("CompleteTask") + LocalizationHelper.GetString("CreditFight"));
-                                        AchievementTrackerHelper.Instance.AddProgress(AchievementIds.MosquitoLeg);
                                         break;
                                     }
 
@@ -2340,8 +2285,6 @@ public class AsstProxy
                         toolTip: dropsForTooltip.CreateMaterialDropTooltip(),
                         updateCardImage: true);
 
-                    AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.SanitySpenderGroup, curTimes > 0 ? curTimes : 1);
-
                     // 联动更新 Depot 数据
                     Instances.ToolboxViewModel.UpdateDepotFromDrops(drops);
 
@@ -2442,16 +2385,6 @@ public class AsstProxy
                         Instances.TaskQueueViewModel.AddLog(level + " ★ Tags", UiLogColor.Info, toolTip: tooltip);
                     }
 
-                    if (level == 6)
-                    {
-                        AchievementTrackerHelper.Instance.SetProgress(AchievementIds.RecruitNoSixStarStreak, 1);
-                    }
-                    else
-                    {
-                        AchievementTrackerHelper.Instance.AddProgress(AchievementIds.RecruitNoSixStar); // 累计
-                        AchievementTrackerHelper.Instance.AddProgress(AchievementIds.RecruitNoSixStarStreak); // 连续
-                    }
-
                     /*
                     bool robot = (bool)subTaskDetails["robot"];
                     if (robot)
@@ -2491,7 +2424,6 @@ public class AsstProxy
                 {
                     int refreshCount = (int)subTaskDetails!["count"]!;
                     Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("Refreshed") + refreshCount + LocalizationHelper.GetString("UnitTime"));
-                    AchievementTrackerHelper.Instance.AddProgress(AchievementIds.RecruitGambler);
                     break;
                 }
 

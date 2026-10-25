@@ -79,18 +79,6 @@ public partial class HotKeyEditorUserControl : System.Windows.Controls.UserContr
             });
     }
 
-    private static int CountModifierKeys(ModifierKeys modifiers)
-    {
-        int count = 0;
-#pragma warning disable SA1503 // 单行计数保持紧凑
-        if ((modifiers & ModifierKeys.Control) != 0) count++;
-        if ((modifiers & ModifierKeys.Alt) != 0) count++;
-        if ((modifiers & ModifierKeys.Shift) != 0) count++;
-        if ((modifiers & ModifierKeys.Windows) != 0) count++;
-#pragma warning restore SA1503 // 单行计数保持紧凑
-        return count;
-    }
-
     private void HotKeyTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
     {
         // Don't let the event pass further
@@ -131,12 +119,6 @@ public partial class HotKeyEditorUserControl : System.Windows.Controls.UserContr
             Key.Apps)
         {
             return;
-        }
-
-        int modifierCount = CountModifierKeys(modifiers);
-        if (modifierCount >= 4)
-        {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.HotkeyMagician);
         }
 
         // Update the value

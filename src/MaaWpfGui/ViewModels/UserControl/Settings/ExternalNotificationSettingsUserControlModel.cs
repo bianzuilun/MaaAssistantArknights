@@ -116,7 +116,6 @@ public class ExternalNotificationSettingsUserControlModel : PropertyChangedBase
         if (ExternalNotificationChannel.All.All(channel =>
             ExternalNotificationConfigs.Any(config => config.GetType() == channel.EditorType)))
         {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.AllChannelBroadcast);
         }
     }
 

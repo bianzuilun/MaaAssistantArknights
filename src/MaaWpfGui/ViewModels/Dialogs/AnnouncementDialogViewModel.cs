@@ -292,11 +292,6 @@ public class AnnouncementDialogViewModel : Screen
             {
                 ButtonContent += "?\u200B";
                 _notFinishedClick++;
-                if (_notFinishedClick > 20)
-                {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.AnnouncementStubbornClick, forceStayOpen: true);
-                    RequestClose();
-                }
             }
         }
     }

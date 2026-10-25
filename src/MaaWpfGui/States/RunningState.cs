@@ -46,8 +46,6 @@ public class RunningState
             ReminderIntervalMinutes = 1;
         }
 
-        _timeoutReminderTimer.Interval = LongTaskTimeoutMinutes * 60 * 1000;
-        _timeoutReminderTimer.Elapsed += TimeoutReminderTimer_Elapsed;
         _stallTimer.Elapsed += StallTimer_Elapsed;
     }
 
@@ -59,8 +57,7 @@ public class RunningState
         }
     }
 
-    // 超时相关字段
-    private readonly System.Timers.Timer _timeoutReminderTimer = new();
+    // 卡死检测计时器
     private readonly System.Timers.Timer _stallTimer = new();
 
     // System.Timers.Timer 实例成员非线程安全，并发 Start/Stop/改 Interval 会抛 NRE；
@@ -73,18 +70,12 @@ public class RunningState
 
     // 防止乘以 60000 毫秒时 int 溢出，int.MaxValue / 60000 ≈ 35791
     private const int MaxMinutes = 11451;
-    private const int LongTaskTimeoutMinutes = 60;
 
     public int ReminderIntervalMinutes
     {
         get; set {
             value = value.Clamp(1, MaxMinutes);
             field = value;
-            TimeoutReminderTimer_Elapsed(null, null);
-            lock (_timerLock)
-            {
-                _timeoutReminderTimer.Interval = value * 60 * 1000;
-            }
         }
     } = 30;
 
@@ -134,7 +125,6 @@ public class RunningState
         lock (_timerLock)
         {
             _taskStartTime = DateTime.Now;
-            _timeoutReminderTimer.Start();
             ResetStallTimer();
         }
     }
@@ -143,7 +133,6 @@ public class RunningState
     {
         lock (_timerLock)
         {
-            _timeoutReminderTimer.Stop();
             _taskStartTime = null;
             ResetStallTimer();
         }
@@ -203,26 +192,6 @@ public class RunningState
         }
     }
 
-    // 超时计时器回调
-    private void TimeoutReminderTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs? e)
-    {
-        bool unlockProxyOnline;
-        lock (_timerLock)
-        {
-            if (_taskStartTime is not { } start || _idle)
-            {
-                return;
-            }
-
-            unlockProxyOnline = (DateTime.Now - start).TotalMinutes > 3 * 60;
-        }
-
-        if (unlockProxyOnline)
-        {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.ProxyOnline3Hours);
-        }
-    }
-
     private void StallTimer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
     {
         RunOwner owner;
@@ -253,9 +222,8 @@ public class RunningState
             }
         }
 
-        // 事件与成就在锁外触发：订阅者回调链可能重入本类的计时方法
+        // 事件在锁外触发：订阅者回调链可能重入本类的计时方法
         StallOccurred?.Invoke(owner, initialMinutes, accumulatedMinutes);
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.LongTaskTimeout);
     }
 
     private bool _idle = true;

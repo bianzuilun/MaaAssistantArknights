@@ -77,7 +77,6 @@ public enum SettingKey
     /// <summary>
     /// 成就设置。
     /// </summary>
-    AchievementSettings,
 
     /// <summary>
     /// 软件更新设置。

@@ -136,7 +136,6 @@ public sealed class MainWindowManager : IMainWindowManager
                 var duration = DateTime.Now - _minimizedSince.Value;
                 if (duration.TotalHours >= 1)
                 {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.AfkWatcher);
                 }
             }
 

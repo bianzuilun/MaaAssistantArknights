@@ -826,11 +826,6 @@ public class ToolboxViewModel : Screen
 
         foreach (var result in results)
         {
-            if (result.Count > 0 &&
-                result.Count > AchievementTrackerHelper.Instance.GetProgress(AchievementIds.WarehouseMiser))
-            {
-                AchievementTrackerHelper.Instance.SetProgress(AchievementIds.WarehouseMiser, result.Count);
-            }
         }
 
         DepotResult.AddRange(results);
@@ -847,7 +842,6 @@ public class ToolboxViewModel : Screen
         if (updateSyncTime)
         {
             // 从 Core 获取新数据，更新为当前 UTC 时间
-            AchievementTrackerHelper.Instance.CheckResyncAfterDays(LastDepotSyncTime?.UtcDateTime, 7, AchievementIds.ResumeRecord);
             LastDepotSyncTime = DateTimeOffset.UtcNow;
         }
         else
@@ -1120,11 +1114,6 @@ public class ToolboxViewModel : Screen
                     existingItem.Count = newCount;
                     hasUpdates = true;
 
-                    // 更新成就进度
-                    if (newCount > AchievementTrackerHelper.Instance.GetProgress(AchievementIds.WarehouseMiser))
-                    {
-                        AchievementTrackerHelper.Instance.SetProgress(AchievementIds.WarehouseMiser, newCount);
-                    }
                 }
             }
             else
@@ -1724,7 +1713,6 @@ public class ToolboxViewModel : Screen
 
                     if (id == "char_485_pallas")
                     {
-                        AchievementTrackerHelper.Instance.Unlock(AchievementIds.WarehouseKeeper);
                     }
                 }
                 else
@@ -1816,7 +1804,6 @@ public class ToolboxViewModel : Screen
                     oper.MainSkillLevel, oper.Skills, oper.Equips));
                 if (oper.Id == "char_485_pallas")
                 {
-                    AchievementTrackerHelper.Instance.Unlock(AchievementIds.WarehouseKeeper);
                 }
             }
 
@@ -1849,7 +1836,6 @@ public class ToolboxViewModel : Screen
 
         if (updateSyncTime)
         {
-            AchievementTrackerHelper.Instance.CheckResyncAfterDays(LastOperBoxSyncTime?.UtcDateTime, 7, AchievementIds.ResumeRecord);
             LastOperBoxSyncTime = DateTimeOffset.UtcNow;
         }
         else
@@ -2200,7 +2186,6 @@ public class ToolboxViewModel : Screen
         Clipboard.Clear();
         Clipboard.SetDataObject(JsonConvert.SerializeObject(exportList, Formatting.Indented));
         GrowlHelper.Info(LocalizationHelper.GetString("CopiedToClipboard"));
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.OperatorRoster);
     }
 
     private void ExportOperBoxToFile(Func<IReadOnlyList<OperBoxData.OperData>, string> contentBuilder, string filter, string defaultExt, string defaultFileName)
@@ -2226,7 +2211,6 @@ public class ToolboxViewModel : Screen
 
         File.WriteAllText(dialog.FileName, content, new UTF8Encoding(true));
         GrowlHelper.Info(LocalizationHelper.GetString("ExportedToFile"));
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.OperatorRoster);
     }
 
     private void ExportOperBoxToJson()
@@ -2461,8 +2445,6 @@ public class ToolboxViewModel : Screen
             return;
         }
 
-        AchievementTrackerHelper.Instance.Unlock(AchievementIds.RealGacha);
-
         GachaShowDisclaimer = false;
     }
 
@@ -2692,8 +2674,6 @@ public class ToolboxViewModel : Screen
 
             // 点击按钮开始 Peep
             Peeping = true;
-
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.PeekScreen);
 
             // 如果没任务在运行，需要先连接，并标记是由 Peep() 方法启动的 Peep
             if (_runningState.GetIdle())
@@ -3535,7 +3515,6 @@ public class ToolboxViewModel : Screen
         }
         else
         {
-            AchievementTrackerHelper.Instance.Unlock(AchievementIds.SlackingOff);
         }
     }
 

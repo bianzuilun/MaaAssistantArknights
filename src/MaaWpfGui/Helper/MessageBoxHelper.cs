@@ -159,7 +159,6 @@ public static class MessageBoxHelper
             var duration = DateTime.Now - startTime;
             if (duration.TotalSeconds <= 1)
             {
-                AchievementTrackerHelper.Instance.Unlock(AchievementIds.QuickCloser);
             }
 
             return result;

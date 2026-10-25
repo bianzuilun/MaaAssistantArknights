@@ -1169,15 +1169,6 @@ public class Bootstrapper : Bootstrapper<RootViewModel>
             return;
         }
 
-        AchievementTrackerHelper.Events.Startup();
-
-        var buildTimeInterval = (DateTimeOffset.UtcNow - VersionUpdateSettingsUserControlModel.BuildDateTime).TotalDays;
-        var resourceTimeInterval = (DateTimeOffset.UtcNow - SettingsViewModel.VersionUpdateSettings.ResourceDateTime).TotalDays;
-        var maxTimeInterval = Math.Max(buildTimeInterval, resourceTimeInterval);
-        if (maxTimeInterval > 90)
-        {
-            Instances.TaskQueueViewModel.LogItemViewModels.Add(new(LocalizationHelper.GetStringFormat("Achievement.Martian.ConditionsTip", (maxTimeInterval / 30.436875).ToString("F2")), UiLogColor.Error));
-        }
     }
 
     /// <inheritdoc/>

@@ -69,10 +69,8 @@ public partial class FightTaskUserControlModel
                         }
                     }
                     medicineLog = LocalizationHelper.GetStringFormat("ExpiringMedicineUsed", expireOut) + $" {ExpiringMedicineUsedTimes}(+{report.Count})";
-                    AchievementTrackerHelper.Instance.SetProgress(AchievementIds.SanityExpire, ExpiringMedicineUsedTimes);
                 }
 
-                AchievementTrackerHelper.Instance.AddProgressToGroup(AchievementIds.SanitySaverGroup, report.Count);
                 if (report.Medicines?.Count > 0)
                 {
                     var list = report.Medicines?.Select(i => LocalizationHelper.GetStringFormat("UseMedicine.MedicineInfo", i.Use, i.Inventory)).ToList();
@@ -87,10 +85,6 @@ public partial class FightTaskUserControlModel
                     if ((msg.Details?.Children())?.Any() is true)
                     {
                         FightReport = msg.Details.ToObject<FightTimes>()!;
-                        if (FightReport.TimesFinished > 0)
-                        {
-                            AchievementTrackerHelper.Instance.SetProgress(AchievementIds.OverLimitAgent, FightReport.TimesFinished);
-                        }
 
                         var task = Instance.GetConfigByTaskId<FightTask>(msg.TaskId);
                         if (task is not null && task.EnableTimesLimit != false && FightReport.IsFinished && FightReport.TimesFinished < task.TimesLimit)
