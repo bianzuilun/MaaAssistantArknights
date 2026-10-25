@@ -202,26 +202,8 @@ public class AchievementTrackerHelper : PropertyChangedBase
 
     public void Unlock(string id, bool staysOpen = true, bool forceStayOpen = false)
     {
-        if (!_achievements.TryGetValue(id, out var achievement) || achievement.IsUnlocked)
-        {
-            return;
-        }
-
-        achievement.IsUnlocked = true;
-        achievement.UnlockedTime = DateTime.UtcNow;
-        achievement.IsNewUnlock = true;
-        Save();
-
-        var growlInfo = new GrowlInfo {
-            IsCustom = true,
-            Message = $"{LocalizationHelper.GetString("AchievementCelebrate")}: {achievement.Title}\n{achievement.Description}",
-            StaysOpen = forceStayOpen || (staysOpen && !SettingsViewModel.AchievementSettings.AchievementPopupAutoClose),
-            WaitTime = 15,
-            IconKey = "HangoverGeometry",
-            IconBrushKey = achievement.MedalBrushKey,
-        };
-        _growlAchievementMap[growlInfo] = id;
-        ShowInfo(growlInfo, forceStayOpen: forceStayOpen);
+        // 自用精简版：成就系统不启用，解锁一律不做，也不弹提示
+        return;
     }
 
     public async Task UnlockAll()
