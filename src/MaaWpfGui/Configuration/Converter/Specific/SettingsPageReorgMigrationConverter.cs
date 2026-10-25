@@ -13,7 +13,6 @@
 
 #nullable enable
 using System;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
@@ -29,17 +28,11 @@ namespace MaaWpfGui.Configuration.Converter.Specific;
 //    values of other profiles are kept in place and dropped as they may conflict with no
 //    merge semantics. Keeping migration here also covers inactive profiles and backup
 //    restoration.
-// 2. In the persisted order list, rename SettingKey ExternalNotificationSettings to
-//    NotificationSettings so the merged section inherits its position. Release users never
-//    saw NotificationSettings (introduced after the last release), so without the rename it
-//    would be appended at the end. The collapse list is not migrated: collapse state does
-//    not carry over to the merged section.
-// 3. Drop unknown or removed SettingKey entries from both lists here, so the tolerant
+// 2. Drop unknown or removed SettingKey entries from both lists here, so the tolerant
 //    deserialization fallback (exception per invalid key) is not triggered on first launch.
 // All are no-op when the legacy keys are absent, hence idempotent.
 internal sealed class SettingsPageReorgMigrationConverter : JsonConverter<Root>
 {
-    private const string RemovedExternalNotificationSettingsKey = "ExternalNotificationSettings";
 
     public override Root? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -95,33 +88,12 @@ internal sealed class SettingsPageReorgMigrationConverter : JsonConverter<Root>
                 continue;
             }
 
-            // 列表已含 NotificationSettings（如曾运行过更新版本）时直接移除废弃键，避免重命名产生重复项；
-            // 大小写变体同样计入（含手改的小写形态），防止其绕过防重复检查
-            var hasNotificationSettings = list.Any(item => item is JsonValue itemValue &&
-                itemValue.TryGetValue<string>(out var itemString) &&
-                string.Equals(itemString, nameof(SettingKey.NotificationSettings), StringComparison.OrdinalIgnoreCase));
-
-            // 大小写宽容度对齐 TolerantEnumConverter 的 ignoreCase 解析：只删下游必死的键，不误删大小写变体
+            // 大小写宽容度对齐 TolerantEnumConverter 的 ignoreCase 解析：剔除已删除或未知的设置键
             for (var i = list.Count - 1; i >= 0; i--)
             {
                 var entry = list[i] is JsonValue entryValue && entryValue.TryGetValue<string>(out var entryString)
                     ? entryString
                     : null;
-
-                if (string.Equals(entry, RemovedExternalNotificationSettingsKey, StringComparison.OrdinalIgnoreCase) &&
-                    listName == nameof(Gui.SettingOrders))
-                {
-                    if (hasNotificationSettings)
-                    {
-                        list.RemoveAt(i);
-                    }
-                    else
-                    {
-                        list[i] = nameof(SettingKey.NotificationSettings);
-                    }
-
-                    continue;
-                }
 
                 if (entry is null || !Enum.TryParse(entry, ignoreCase: true, out SettingKey settingKey) ||
                     !Enum.IsDefined(settingKey))

@@ -180,8 +180,6 @@ public class SettingsViewModel : Screen
 
     public SettingItemViewModel ScheduleSettingsSetting => GetSettingItemByKey("ScheduleSettings");
 
-    public SettingItemViewModel PerformanceSettingsSetting => GetSettingItemByKey("PerformanceSettings");
-
     public SettingItemViewModel GameSettingsSetting => GetSettingItemByKey("GameSettings");
 
     public SettingItemViewModel ConnectionSettingsSetting => GetSettingItemByKey("ConnectionSettings");
@@ -191,12 +189,6 @@ public class SettingsViewModel : Screen
     public SettingItemViewModel RemoteControlSettingsSetting => GetSettingItemByKey("RemoteControlSettings");
 
     public SettingItemViewModel UiSettingsSetting => GetSettingItemByKey("UiSettings");
-
-    public SettingItemViewModel NotificationSettingsSetting => GetSettingItemByKey("NotificationSettings");
-
-    public SettingItemViewModel ThirdPartyServiceSettingsSetting => GetSettingItemByKey("ThirdPartyServiceSettings");
-
-    public SettingItemViewModel HotKeySettingsSetting => GetSettingItemByKey("HotKeySettings");
 
     public SettingItemViewModel UpdateSettingsSetting => GetSettingItemByKey("UpdateSettings");
 
@@ -1190,12 +1182,6 @@ public class SettingsViewModel : Screen
         set => SetExpanderState(SettingKey.ScheduleSettings, value);
     }
 
-    public bool IsPerformanceSettingsExpanded
-    {
-        get => GetExpanderState(SettingKey.PerformanceSettings);
-        set => SetExpanderState(SettingKey.PerformanceSettings, value);
-    }
-
     public bool IsGameSettingsExpanded
     {
         get => GetExpanderState(SettingKey.GameSettings);
@@ -1224,24 +1210,6 @@ public class SettingsViewModel : Screen
     {
         get => GetExpanderState(SettingKey.UiSettings);
         set => SetExpanderState(SettingKey.UiSettings, value);
-    }
-
-    public bool IsNotificationSettingsExpanded
-    {
-        get => GetExpanderState(SettingKey.NotificationSettings);
-        set => SetExpanderState(SettingKey.NotificationSettings, value);
-    }
-
-    public bool IsThirdPartyServiceSettingsExpanded
-    {
-        get => GetExpanderState(SettingKey.ThirdPartyServiceSettings);
-        set => SetExpanderState(SettingKey.ThirdPartyServiceSettings, value);
-    }
-
-    public bool IsHotKeySettingsExpanded
-    {
-        get => GetExpanderState(SettingKey.HotKeySettings);
-        set => SetExpanderState(SettingKey.HotKeySettings, value);
     }
 
     public bool IsUpdateSettingsExpanded

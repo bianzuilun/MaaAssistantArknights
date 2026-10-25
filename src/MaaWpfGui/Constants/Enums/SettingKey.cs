@@ -30,11 +30,6 @@ public enum SettingKey
     ScheduleSettings,
 
     /// <summary>
-    /// 性能设置。
-    /// </summary>
-    PerformanceSettings,
-
-    /// <summary>
     /// 游戏设置。
     /// </summary>
     GameSettings,
@@ -58,25 +53,6 @@ public enum SettingKey
     /// 界面设置。
     /// </summary>
     UiSettings,
-
-    /// <summary>
-    /// 通知设置。
-    /// </summary>
-    NotificationSettings,
-
-    /// <summary>
-    /// 三方服务设置。
-    /// </summary>
-    ThirdPartyServiceSettings,
-
-    /// <summary>
-    /// 快捷键设置。
-    /// </summary>
-    HotKeySettings,
-
-    /// <summary>
-    /// 成就设置。
-    /// </summary>
 
     /// <summary>
     /// 软件更新设置。
