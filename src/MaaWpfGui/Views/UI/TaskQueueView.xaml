@@ -15,7 +15,6 @@
     xmlns:singleTask="clr-namespace:MaaWpfGui.Configuration.Single.MaaTask"
     xmlns:taskQueue="clr-namespace:MaaWpfGui.Views.UserControl.TaskQueue"
     xmlns:ui_vms="clr-namespace:MaaWpfGui.ViewModels.UI"
-    xmlns:userControl="clr-namespace:MaaWpfGui.Views.UserControl"
     MinWidth="720"
     d:Background="White"
     d:DataContext="{d:DesignInstance {x:Type ui_vms:TaskQueueViewModel}}"
@@ -23,13 +22,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid>
-        <userControl:GuideUserControl
-            x:Name="Guide"
-            VerticalAlignment="Stretch"
-            s:View.ActionTarget="{Binding DataContext, RelativeSource={RelativeSource Self}}"
-            DataContext="{Binding TaskSettingDataContext}"
-            Visibility="{c:Binding TaskSettingVisibilities.Guide}" />
-        <Grid Margin="20" Visibility="{c:Binding !TaskSettingVisibilities.Guide}">
+        <Grid Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -521,7 +514,7 @@
                         Height="50"
                         Margin="5"
                         Command="{s:Action LinkStart}"
-                        IsEnabled="{c:Binding 'Run.CanStart and !TaskSettingVisibilities.Guide'}"
+                        IsEnabled="{c:Binding Run.CanStart}"
                         Visibility="{c:Binding '!Run.Inited or Run.CanStart'}">
                         <Button.Style>
                             <Style BasedOn="{StaticResource MaaButtonDefaultStyle}" TargetType="Button">
@@ -616,12 +609,6 @@
                                 Visibility="{c:Binding DataContext.TaskSettingVisibilities.Fight,
                                                        RelativeSource={RelativeSource Mode=FindAncestor,
                                                                                       AncestorType={x:Type UserControl}}}" />
-                            <taskQueue:OperProgressTaskUserControl
-                                DataContext="{Binding OperProgressTask}"
-                                IsEnabled="{Binding DataContext.Run.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Visibility="{c:Binding DataContext.TaskSettingVisibilities.OperProgress,
-                                                       RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                      AncestorType={x:Type UserControl}}}" />
                             <taskQueue:RecruitTaskUserControl
                                 DataContext="{Binding RecruitTask}"
                                 IsEnabled="{Binding DataContext.Run.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
@@ -654,24 +641,6 @@
                                                                                       AncestorType={x:Type UserControl}}}" />
                             <taskQueue:RoguelikeTaskUserControl DataContext="{Binding RoguelikeTask}" Visibility="{c:Binding DataContext.TaskSettingVisibilities.Roguelike, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" />
                             <taskQueue:ReclamationTaskUserControl DataContext="{Binding ReclamationTask}" Visibility="{c:Binding DataContext.TaskSettingVisibilities.Reclamation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" />
-                            <taskQueue:UserDataUpdateTaskUserControl
-                                DataContext="{Binding UserDataUpdateTask}"
-                                IsEnabled="{Binding DataContext.Run.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Visibility="{c:Binding DataContext.TaskSettingVisibilities.UserDataUpdate,
-                                                       RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                      AncestorType={x:Type UserControl}}}" />
-                            <taskQueue:DepotMaintainTaskUserControl
-                                DataContext="{Binding DepotMaintainTask}"
-                                IsEnabled="{Binding DataContext.Run.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Visibility="{c:Binding DataContext.TaskSettingVisibilities.DepotMaintain,
-                                                       RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                      AncestorType={x:Type UserControl}}}" />
-                            <taskQueue:SwitchThemeTaskUserControl
-                                DataContext="{Binding SwitchThemeTask}"
-                                IsEnabled="{Binding DataContext.Run.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
-                                Visibility="{c:Binding DataContext.TaskSettingVisibilities.SwitchTheme,
-                                                       RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                                      AncestorType={x:Type UserControl}}}" />
                             <taskQueue:CustomTaskUserControl DataContext="{Binding CustomTask}" Visibility="{c:Binding DataContext.TaskSettingVisibilities.Custom, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" />
                             <taskQueue:PostActionUserControl DataContext="{Binding PostActionSetting}" Visibility="{c:Binding DataContext.TaskSettingVisibilities.PostAction, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}" />
                         </hc:SimpleStackPanel>
@@ -738,8 +707,7 @@
                 Grid.Column="2"
                 Margin="10,10,0,10"
                 HorizontalAlignment="Stretch"
-                VerticalAlignment="Top"
-                Visibility="{c:Binding !TaskSettingVisibilities.Guide}">
+                VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />

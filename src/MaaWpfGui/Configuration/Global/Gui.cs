@@ -65,7 +65,7 @@ public class Gui : NotifyPropertyChangedWithValue
 
     public InverseClearType InverseClearMode { get; set; } = InverseClearType.Clear;
 
-    public TransitionSpeedType TransitionSpeed { get; set; } = TransitionSpeedType.Normal;
+    public TransitionSpeedType TransitionSpeed { get; set; } = TransitionSpeedType.None;
 
     public bool TaskQueueInverseMode { get; set; }
 

@@ -1301,11 +1301,8 @@ public class TaskQueueViewModel : Screen
             ConfigFactory.CurrentConfig.TaskQueue.Add(new RecruitTask());
             ConfigFactory.CurrentConfig.TaskQueue.Add(new MallTask());
             ConfigFactory.CurrentConfig.TaskQueue.Add(new AwardTask());
-
-            // ConfigFactory.CurrentConfig.TaskQueue.Add(new OperProgressTask());
             ConfigFactory.CurrentConfig.TaskQueue.Add(new RoguelikeTask());
             ConfigFactory.CurrentConfig.TaskQueue.Add(new ReclamationTask());
-            ConfigFactory.CurrentConfig.TaskQueue.Add(new UserDataUpdateTask());
         }
 
         // 临时补足到8个，支持添加删除后移除此代码
@@ -1752,12 +1749,8 @@ public class TaskQueueViewModel : Screen
             new TaskTypeItem(LocalizationHelper.GetString("Recruit"), typeof(RecruitTask)),
             new TaskTypeItem(LocalizationHelper.GetString("Mall"), typeof(MallTask)),
             new TaskTypeItem(LocalizationHelper.GetString("Award"), typeof(AwardTask)),
-            new TaskTypeItem(LocalizationHelper.GetString("OperProgress"), typeof(OperProgressTask), introducedVersion: "6.19.0-beta.2"),
             new TaskTypeItem(LocalizationHelper.GetString("Roguelike"), typeof(RoguelikeTask)),
             new TaskTypeItem(LocalizationHelper.GetString("Reclamation"), typeof(ReclamationTask)),
-            new TaskTypeItem(LocalizationHelper.GetString("UserDataUpdate"), typeof(UserDataUpdateTask)),
-            new TaskTypeItem(LocalizationHelper.GetString("DepotMaintain"), typeof(DepotMaintainTask)),
-            new TaskTypeItem(LocalizationHelper.GetString("SwitchTheme"), typeof(SwitchThemeTask), introducedVersion: "6.19.0-beta.2"),
             new TaskTypeItem(LocalizationHelper.GetString("Custom"), typeof(CustomTask), isDebugOnly: true),
         ]);
 
@@ -1772,12 +1765,8 @@ public class TaskQueueViewModel : Screen
                 nameof(RecruitTask) => LocalizationHelper.GetString("Recruit"),
                 nameof(MallTask) => LocalizationHelper.GetString("Mall"),
                 nameof(AwardTask) => LocalizationHelper.GetString("Award"),
-                nameof(OperProgressTask) => LocalizationHelper.GetString("OperProgress"),
                 nameof(RoguelikeTask) => LocalizationHelper.GetString("Roguelike"),
                 nameof(ReclamationTask) => LocalizationHelper.GetString("Reclamation"),
-                nameof(UserDataUpdateTask) => LocalizationHelper.GetString("UserDataUpdate"),
-                nameof(DepotMaintainTask) => LocalizationHelper.GetString("DepotMaintain"),
-                nameof(SwitchThemeTask) => LocalizationHelper.GetString("SwitchTheme"),
                 nameof(CustomTask) => LocalizationHelper.GetString("Custom"),
                 _ => item.Display,
             };
