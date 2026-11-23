@@ -2768,6 +2768,8 @@ public class ToolboxViewModel : Screen
         public bool IsEventShop => Value == "SS@Store@Begin";
 
         public bool IsReclamation => Value == "Reclamation";
+
+        public bool IsGarrisonProtocol => Value == "GarrisonProtocol";
     }
 
     public static string MaterialSynthesisVideoPath => Path.Combine(PathsHelper.BaseDir, "Res", "Video", "MaterialSynthesis.mp4");
@@ -2804,6 +2806,8 @@ public class ToolboxViewModel : Screen
     public bool IsAutoRaisePotentialSelected => SelectedMiniGameItem?.IsAutoRaisePotential == true;
 
     public bool IsReclamationSelected => SelectedMiniGameItem?.IsReclamation == true;
+
+    public bool IsGarrisonProtocolSelected => SelectedMiniGameItem?.IsGarrisonProtocol == true;
 
     public static void UpdateMiniGameTaskList()
     {
@@ -3513,6 +3517,12 @@ public class ToolboxViewModel : Screen
     {
         // 小游戏自身运行中的停止是清场，不发射结束脚本；
         // 其他归属的运行经此停止属手动停止语义，脚本条件由运行归属判定
+        if (GarrisonProtocolUserControlModel.Instance.IsRunning)
+        {
+            await GarrisonProtocolUserControlModel.Instance.StopAsync();
+            return;
+        }
+
         if (_runningState.Owner == RunOwner.MiniGame)
         {
             await Instances.TaskQueueViewModel.Stop();
@@ -3527,6 +3537,12 @@ public class ToolboxViewModel : Screen
     {
         if (!CheckSelectedMiniGameReady())
         {
+            return;
+        }
+
+        if (IsGarrisonProtocolSelected)
+        {
+            await StartGarrisonProtocolAsync();
             return;
         }
 
@@ -3583,6 +3599,34 @@ public class ToolboxViewModel : Screen
         }
     }
 
+    /// <summary>
+    /// 启动卫戍协议试跑：占用 MiniGame 运行归属，不连接 MaaCore，以免和 GarrisonFarm 抢 ADB。
+    /// </summary>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    private Task StartGarrisonProtocolAsync()
+    {
+        if (Bootstrapper.TryGetTaskBlockReason() is { } reason)
+        {
+            Instances.TaskQueueViewModel.AddLog(reason, UiLogColor.Error);
+            return Task.CompletedTask;
+        }
+
+        Instances.TaskQueueViewModel.ClearLog();
+        _runningState.BeginRun(RunOwner.MiniGame);
+
+        var started = GarrisonProtocolUserControlModel.Instance.StartProcess();
+        if (!started)
+        {
+            _runningState.SetIdle(true);
+        }
+        else
+        {
+            AchievementTrackerHelper.Instance.Unlock(AchievementIds.SlackingOff);
+        }
+
+        return Task.CompletedTask;
+    }
+
     /// <summary>校验选中任务的前置条件，不满足时已输出日志。</summary>
     /// <returns>是否可以启动。</returns>
     private bool CheckSelectedMiniGameReady()
@@ -3590,6 +3634,12 @@ public class ToolboxViewModel : Screen
         if (IsPixelPaintSelected && (_pixelPaintResult == null || _pixelPaintResult.Groups.Count == 0))
         {
             Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("MiniGame@PixelPaint@NeedImage"), UiLogColor.Warning);
+            return false;
+        }
+
+        if (IsGarrisonProtocolSelected && !GarrisonProtocolUserControlModel.Instance.TryValidate(out var garrisonError))
+        {
+            Instances.TaskQueueViewModel.AddLog(garrisonError, UiLogColor.Warning);
             return false;
         }
 
@@ -3608,6 +3658,12 @@ public class ToolboxViewModel : Screen
         if (IsReclamationSelected)
         {
             return ReclamationUserControlModel.Instance.AppendAndStartReclamationTask();
+        }
+
+        if (IsGarrisonProtocolSelected)
+        {
+            _logger.Warning("GarrisonProtocol must not start through the MaaCore connect path");
+            return false;
         }
 
         if (IsAutoRaisePotentialSelected)

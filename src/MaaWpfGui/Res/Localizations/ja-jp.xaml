@@ -1040,6 +1040,7 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGameCategoryPermanent">常設イベント</system:String>
     <system:String x:Key="MiniGameCategoryCurrentEvent">現在のイベント</system:String>
     <system:String x:Key="MiniGameCategoryPermanentFeature">常設機能</system:String>
+    <system:String x:Key="MiniGameCategoryExperimental">実験</system:String>
     <system:String x:Key="Custom">カスタムタスク</system:String>
     <system:String x:Key="SingleStep">単一ステップタスク</system:String>
     <system:String x:Key="ReclamationTheme">主題</system:String>
@@ -1460,6 +1461,24 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGame@AutoRaisePotential@NoPotentialLog">オペレーター {0}/{1}：強化可能な潜在能力なし</system:String>
     <system:String x:Key="MiniGame@CursedRelic">ファントム ヴィクトリアのクラウン リロール</system:String>
     <system:String x:Key="MiniGame@CursedRelicTip" xml:space="preserve">ファントムのメインメニューで ｢探索開始｣ ボタンが表示されている状態から開始してください。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol">堅守協定の試行</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocolTip" xml:space="preserve">実験：GarrisonFarm の実機スクリプトで ｢ 堅守協定 ｣ をプレイします。&#10;リポジトリは自分でクローンし、Python 依存関係を入れてください。モデルは任意ダウンロード／差し替えです。&#10;モデルが無い場合は作者のルール表に戻します。成功条件は 1 局を終えてログを残すことであり、クリアは保証しません。&#10;OCR は簡体中国語向けです。メインの任務キューと同時に実行しないでください。堅守協定のイベント画面から開始してください。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmDir">GarrisonFarm ディレクトリ</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPath">モデルパス（任意）</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPathPlaceholder">空なら models/ppo_019 を試す</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonPath">Python</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@GameCount">回数</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBonds">必須の追加盟約</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBondsPlaceholder">精准,灵巧</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmMissing">GarrisonFarm ディレクトリが見つかりません（rl_live.py が必要）。先にクローンしてください。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonMissing">Python を起動できません。インタプリタのパスを確認してください。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@AdbMissing">先に設定で ADB パスとアドレスを記入してください。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@LauncherMissing">試行ランチャー run_trial.py が見つかりません。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Started">GarrisonFarm の実機スクリプトを開始しました。ログは右側です。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@RuleFallback">モデルが見つからないため、作者のルール表に戻します（指導者コア盟約 + 2/4/6/8 ターンの強化）。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@UsingModel">モデル {0} を使用</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Exited">試行終了、終了コード {0}</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@StartFailed">GarrisonFarm プロセスを起動できませんでした。</system:String>
 
     <system:String x:Key="MiniGameNameGreenTicketStore">緑チケット商店</system:String>
     <system:String x:Key="MiniGameNameGreenTicketStoreTip" xml:space="preserve">1階は全部購入。&#10;2階はスカウト券と求人票を購入のみ。</system:String>

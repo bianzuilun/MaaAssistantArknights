@@ -27,6 +27,7 @@ public class MiniGame : NotifyPropertyChangedWithValue
     {
         PropertyChanged += Handler.OnPropertyChangedFactory(prefix);
         Reclamation.EventBinding(prefix + nameof(Reclamation) + ".");
+        GarrisonProtocol.EventBinding(prefix + nameof(GarrisonProtocol) + ".");
     }
 
     public string EventShopBlackList { get; set; } = string.Empty;
@@ -43,4 +44,7 @@ public class MiniGame : NotifyPropertyChangedWithValue
 
     [JsonInclude]
     public Reclamation Reclamation { get; private set; } = new();
+
+    [JsonInclude]
+    public GarrisonProtocol GarrisonProtocol { get; private set; } = new();
 }

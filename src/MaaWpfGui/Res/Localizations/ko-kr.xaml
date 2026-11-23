@@ -1039,6 +1039,7 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGameCategoryPermanent">상시 활동</system:String>
     <system:String x:Key="MiniGameCategoryCurrentEvent">현재 이벤트</system:String>
     <system:String x:Key="MiniGameCategoryPermanentFeature">상시 기능</system:String>
+    <system:String x:Key="MiniGameCategoryExperimental">실험</system:String>
     <system:String x:Key="Custom">커스텀 작업</system:String>
     <system:String x:Key="SingleStep">단일 단계 작업</system:String>
     <system:String x:Key="ReclamationTheme">생존 연산 테마</system:String>
@@ -1459,6 +1460,24 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGame@AutoRaisePotential@NoPotentialLog">오퍼레이터 {0}/{1}: 강화 가능한 잠재능력 없음</system:String>
     <system:String x:Key="MiniGame@CursedRelic">팬텀 빅토리아 왕관 리롤</system:String>
     <system:String x:Key="MiniGame@CursedRelicTip" xml:space="preserve">팬텀 로그라이크 메인 화면에서 '탐험 시작' 버튼이 표시된 상태에서 시작하세요</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol">위수 협의 시험 실행</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocolTip" xml:space="preserve">실험: GarrisonFarm 실기 스크립트로 위수 협의를 플레이합니다.&#10;해당 저장소를 직접 클론하고 Python 의존성을 설치하세요. 모델 가중치는 직접 받거나 교체할 수 있습니다.&#10;모델이 없으면 작성자의 규칙표로 돌아갑니다. 성공 기준은 한 판을 끝내고 로그를 남기는 것이며, 클리어를 보장하지 않습니다.&#10;OCR은 간체 중국어 기준입니다. 메인 임무 대기열과 동시에 실행하지 마세요. 위수 협의 이벤트 화면에서 시작하세요.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmDir">GarrisonFarm 폴더</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPath">모델 경로 (선택)</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPathPlaceholder">비우면 models/ppo_019 시도</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonPath">Python</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@GameCount">판 수</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBonds">필수 추가 맹약</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBondsPlaceholder">精准,灵巧</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmMissing">GarrisonFarm 폴더를 찾을 수 없습니다(rl_live.py 필요). 먼저 클론하세요.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonMissing">Python을 시작할 수 없습니다. 인터프리터 경로를 확인하세요.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@AdbMissing">설정에서 ADB 경로와 주소를 먼저 입력하세요.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@LauncherMissing">시험 실행기 run_trial.py를 찾을 수 없습니다.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Started">GarrisonFarm 실기 스크립트를 시작했습니다. 로그는 오른쪽입니다.</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@RuleFallback">모델이 없어 작성자 규칙표로 돌아갑니다(리더 핵심 맹약 + 2/4/6/8턴 강화).</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@UsingModel">모델 {0} 사용</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Exited">시험 실행 종료, 종료 코드 {0}</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@StartFailed">GarrisonFarm 프로세스를 시작할 수 없습니다.</system:String>
 
     <system:String x:Key="MiniGameNameGreenTicketStore">자격증명서 상점</system:String>
     <system:String x:Key="MiniGameNameGreenTicketStoreTip" xml:space="preserve">1단계는 전부 구매하고&#10;2단계는 헤드헌팅 허가증과 모집 허가증을 구매해요</system:String>

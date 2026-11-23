@@ -1039,6 +1039,7 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGameCategoryPermanent">常駐活動</system:String>
     <system:String x:Key="MiniGameCategoryCurrentEvent">目前活動</system:String>
     <system:String x:Key="MiniGameCategoryPermanentFeature">常駐功能</system:String>
+    <system:String x:Key="MiniGameCategoryExperimental">實驗</system:String>
     <system:String x:Key="Custom">自訂任務</system:String>
     <system:String x:Key="SingleStep">單步任務</system:String>
     <system:String x:Key="ReclamationTheme">生息演算主題</system:String>
@@ -1459,6 +1460,24 @@ C:\leidian\LDPlayer9
     <system:String x:Key="MiniGame@AutoRaisePotential@NoPotentialLog">第 {0}/{1} 位幹員：無可提升的潛能</system:String>
     <system:String x:Key="MiniGame@CursedRelic">刷傀影維多利亞皇冠</system:String>
     <system:String x:Key="MiniGame@CursedRelicTip" xml:space="preserve">請從傀影肉鴿主選單中 ｢探索｣ 按鈕可見的狀態開始。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol">衛戍協議試跑</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocolTip" xml:space="preserve">實驗入口：呼叫 GarrisonFarm 實機腳本打 ｢ 衛戍協議 ｣ 規程。&#10;請自行複製該倉庫、安裝 Python 相依套件，模型權重可自行下載或替換。&#10;無模型時回退到作者規則表。目標是打完一局並留下日誌，不保證通關。&#10;依簡中介面 OCR，請勿與一鍵長草同時執行。請在衛戍協議活動頁開始。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmDir">GarrisonFarm 目錄</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPath">模型路徑（可選）</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@ModelPathPlaceholder">空白則嘗試 models/ppo_019</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonPath">Python</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@GameCount">局數</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBonds">必須出現的附加盟約</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@NeedBondsPlaceholder">精准,灵巧</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@FarmMissing">找不到 GarrisonFarm 目錄（需包含 rl_live.py）。請先自行複製該專案。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@PythonMissing">無法啟動 Python，請檢查直譯器路徑。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@AdbMissing">請先在設定中填寫 ADB 路徑和位址。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@LauncherMissing">找不到試跑啟動器 run_trial.py。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Started">已啟動 GarrisonFarm 實機腳本，日誌見右側。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@RuleFallback">未找到模型，回退到作者規則表（領袖核心盟約 + 第 2/4/6/8 回合升級）。</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@UsingModel">使用模型 {0}</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@Exited">試跑結束，結束代碼 {0}</system:String>
+    <system:String x:Key="MiniGame@GarrisonProtocol@StartFailed">無法拉起 GarrisonFarm 行程。</system:String>
 
     <system:String x:Key="MiniGameNameGreenTicketStore">綠票商店</system:String>
     <system:String x:Key="MiniGameNameGreenTicketStoreTip" xml:space="preserve">第 1 層全買。&#10;第 2 層買 ｢尋訪憑證｣ 和 ｢招聘許可｣。</system:String>

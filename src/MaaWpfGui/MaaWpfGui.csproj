@@ -104,6 +104,7 @@
     <Resource Include="Res\Img\EasterEgg\*" />
     <Resource Include="Res\Img\Operator\*" />
     <Content Include="Res\Video\*" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\..\tools\GarrisonProtocol\run_trial.py" Link="GarrisonProtocol\run_trial.py" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\README.md" Pack="True" PackagePath="/" />
   </ItemGroup>
 

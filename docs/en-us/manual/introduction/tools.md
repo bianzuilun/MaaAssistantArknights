@@ -75,6 +75,15 @@ Built-in features include:
   - Reclamation Algorithm shop exchange
   - Automatically Raise Potential
   - Missing Material Synthesis
+- Experimental
+  - Stronghold Protocol trial (runs the GarrisonFarm live script; download the model yourself; a clear is not guaranteed)
+
+### Stronghold Protocol trial (experimental)
+
+1. Clone [GarrisonFarm](https://github.com/UnknownGlyph/GarrisonFarm) yourself and install its Python dependencies
+2. Optionally download the author's `ppo_019` weights; with no model it falls back to the author's rule table
+3. Fill in the GarrisonFarm directory on this Toolbox entry, then start; do not run it together with the main task queue
+4. OCR is Simplified Chinese. Success means finishing a Stronghold Protocol run with logs, not a guaranteed clear
 
 ### Reclamation Algorithm
 
